@@ -8,8 +8,18 @@ import type { NextConfig } from 'next'
 
 /** Configuration. */
 const nextConfig: NextConfig = {
+  output: 'export',
+  reactStrictMode: true,
   images: {
-    domains: ['is1-ssl.mzstatic.com'],
+    loader: 'custom',
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+        port: '',
+        pathname: '**',
+      },
+    ],
   },
 }
 

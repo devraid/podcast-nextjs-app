@@ -7,7 +7,7 @@
 /** Dependencies. */
 import { useState } from 'react'
 import { usePodcastContext } from '../app/store/podcast'
-import Image from 'next/image'
+import Image from '../app/components/image'
 import Link from 'next/link'
 
 /**
