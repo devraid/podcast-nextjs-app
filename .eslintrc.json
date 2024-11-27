@@ -1,0 +1,90 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended", "plugin:prettier/recommended"],
+  "plugins": ["@typescript-eslint", "prettier", "json-format", "prefer-arrow", "check-file"],
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "overrides": [
+    {
+      "files": ["*.json"],
+      "parser": "eslint-plugin-json-format",
+      "rules": {
+        "prettier/prettier": "error"
+      }
+    }
+  ],
+  "rules": {
+    "prettier/prettier": "error",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": "interface",
+        "format": ["StrictPascalCase"]
+      },
+      {
+        "selector": "class",
+        "format": ["StrictPascalCase"]
+      },
+      {
+        "selector": "objectLiteralProperty",
+        "format": ["strictCamelCase"]
+      },
+      {
+        "selector": "parameter",
+        "format": ["strictCamelCase"]
+      },
+      {
+        "selector": "typeAlias",
+        "format": ["StrictPascalCase"]
+      },
+      {
+        "selector": "function",
+        "format": ["StrictPascalCase"]
+      }
+    ],
+    "camelcase": ["error", { "properties": "always" }],
+    "react/jsx-pascal-case": ["error"],
+    "prefer-arrow/prefer-arrow-functions": [
+      "error",
+      {
+        "disallowPrototype": true,
+        "singleReturnOnly": false,
+        "classPropertiesAllowed": false
+      }
+    ],
+    "prefer-arrow-callback": ["error", { "allowNamedFunctions": true }],
+    "func-style": ["error", "expression", { "allowArrowFunctions": true }],
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-explicit-any": "off",
+    "prefer-promise-reject-errors": "off",
+    "quotes": ["warn", "single", { "avoidEscape": true }],
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "no-unused-vars": "off",
+    "no-tabs": "off",
+    "@typescript-eslint/no-this-alias": [
+      "error",
+      {
+        "allowDestructuring": true,
+        "allowedNames": ["self"]
+      }
+    ],
+    "check-file/filename-naming-convention": [
+      "error",
+      {
+        "app/**/*.tsx": "KEBAB_CASE",
+        "app/**/*.{js,ts}": "KEBAB_CASE"
+      }
+    ],
+    "check-file/folder-naming-convention": [
+      "error",
+      {
+        "app/**/": "KEBAB_CASE"
+      }
+    ]
+  }
+}
