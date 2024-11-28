@@ -7,8 +7,9 @@
 import { ReactNode } from 'react'
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
-import { PodcastProvider } from '../app/store/podcast'
-import './globals.scss'
+import { PodcastsProvider } from '@/app/store/podcasts'
+import { PodcastDetailProvider } from '@/app/store/detail/podcast'
+import '@/app/globals.scss'
 
 /** Fonts Configuration. */
 const geistSans = localFont({
@@ -27,7 +28,7 @@ const geistMono = localFont({
 
 /** Metadata Configuration. */
 export const metadata: Metadata = {
-  title: 'Podcast Next App',
+  title: 'Podcaster Next App',
   description: 'A Podcast app built with Next.js',
 }
 
@@ -43,11 +44,13 @@ export const viewport = 'width=device-width, initial-scale=1'
 const RootLayout: React.FC<Readonly<{ children: ReactNode }>> = ({
   children,
 }: Readonly<{ children: ReactNode }>): JSX.Element => (
-  <PodcastProvider>
+  <PodcastsProvider>
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <PodcastDetailProvider>{children}</PodcastDetailProvider>
+      </body>
     </html>
-  </PodcastProvider>
+  </PodcastsProvider>
 )
 
 export default RootLayout

@@ -1,76 +1,87 @@
-'use client'
+'use server'
 /**
  * @author Miguel Chumillas.
- * @description Homepage for the application.
+ * @description Main page for the application.
  */
 
 /** Dependencies. */
-import { useState } from 'react'
-import { usePodcastContext } from '../app/store/podcast'
-import Image from '../app/components/image'
-import Link from 'next/link'
+import Podcasts from '@/app/components/podcasts'
+
+/** Podcast Interface. */
+interface Podcast {
+  id: string
+  title: string
+  author: string
+  imageUrl: string
+  summary: string
+  link: string
+}
+
+/** ApiEntry Interface. */
+interface ApiEntry {
+  id: {
+    attributes: {
+      'im:id': string
+    }
+  }
+  'im:name': {
+    label: string
+  }
+  'im:artist': {
+    label: string
+  }
+  'im:image': Array<{
+    label: string
+    attributes: {
+      height: string
+    }
+  }>
+  summary: {
+    label: string
+  }
+  link: {
+    attributes: {
+      href: string
+    }
+  }
+}
 
 /**
- * Home Page.
+ * Fetches podcast data from the iTunes API.
  *
- * @returns {JSX.Element} - The page layout structure.
+ * @returns {Promise<Podcast[]>} - A list of podcasts formatted according to the Podcast interface.
  */
-const HomePage = (): JSX.Element => {
-  const { podcasts } = usePodcastContext()
-  const [searchTerm, setSearchTerm] = useState('')
+const fetchPodcasts = async (): Promise<Podcast[]> => {
+  const response = await fetch('https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json', {
+    cache: 'no-store',
+  })
 
-  // Filter podcasts based on search term
-  const filteredPodcasts = podcasts.filter(
-    (podcast) =>
-      podcast.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      podcast.author.toLowerCase().includes(searchTerm.toLowerCase()),
-  )
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`)
+  }
+  const data = await response.json()
 
-  return (
-    <div className="container mx-auto p-4">
-      <div className="flex flex-wrap justify-between items-center mb-8 gap-4">
-        <Link href="/">
-          <h1 className="text-sm font-bold text-blue-500 cursor-pointer flex-shrink-0">Podcaster</h1>
-        </Link>
-        <div className="flex flex-wrap items-center w-full sm:w-auto gap-2 sm:gap-4">
-          <div className="bg-blue-500 text-white text-sm font-semibold rounded-full px-3 py-1 mb-2 sm:mb-0">
-            {filteredPodcasts.length}
-          </div>
-          <input
-            type="text"
-            placeholder="Search podcasts..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="border border-gray-300 rounded-md px-4 py-2 w-full sm:w-64 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
-          />
-        </div>
-      </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {filteredPodcasts.map((podcast) => (
-          <Link
-            href={`/podcast/${podcast.id}`}
-            key={podcast.id}
-          >
-            <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col items-center cursor-pointer min-h-[220px]">
-              <div className="w-32 h-32 overflow-hidden rounded-full">
-                <Image
-                  src={podcast.imageUrl}
-                  alt={podcast.title}
-                  width={128}
-                  height={128}
-                  className="object-cover w-full h-full"
-                />
-              </div>
-              <div className="text-center mt-2 flex-grow flex flex-col justify-center">
-                <h2 className="text-sm font-bold text-gray-600 mb-2 uppercase">{podcast.title}</h2>
-                <p className="text-sm font-semibold text-gray-400">Author: {podcast.author}</p>
-              </div>
-            </div>
-          </Link>
-        ))}
-      </div>
-    </div>
-  )
+  // Transform the API response to match the Podcast interface.
+  return data.feed.entry.map((entry: ApiEntry) => ({
+    id: entry.id.attributes['im:id'],
+    title: entry['im:name'].label,
+    author: entry['im:artist'].label,
+    imageUrl: entry['im:image'].find((img) => img.attributes.height === '170')?.label || '',
+    summary: entry.summary.label,
+    link: entry.link.attributes.href,
+  }))
+}
+
+/**
+ * HomePage component responsible for server-side fetching and rendering the podcasts list.
+ *
+ * @returns {Promise<JSX.Element>} - The page layout structure populated with podcasts.
+ */
+const HomePage = async (): Promise<JSX.Element> => {
+  const podcasts = await fetchPodcasts()
+
+  // Pass data to the client-side component
+  return <Podcasts podcasts={podcasts} />
 }
 
 export default HomePage

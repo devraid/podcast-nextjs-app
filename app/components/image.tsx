@@ -1,13 +1,14 @@
+'use client'
 /**
  * @author Miguel Chumillas.
  * @description Image Component.
  */
 
 /** Dependencies. */
-import NextImage from 'next/image'
+import NextImage, { ImageProps as NextImageProps } from 'next/image'
 
 /** Custom loader. */
-const customLoader = ({ src }: any) => {
+const customLoader = ({ src }: { src: string }) => {
   return src
 }
 
@@ -16,7 +17,7 @@ const customLoader = ({ src }: any) => {
  *
  * @returns {JSX.Element} - The page layout structure.
  */
-const Image = (props: any): JSX.Element => {
+const Image = (props: NextImageProps): JSX.Element => {
   return (
     <NextImage
       {...props}
