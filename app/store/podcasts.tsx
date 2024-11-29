@@ -6,16 +6,7 @@
 
 /** Dependencies. */
 import React, { createContext, useContext, useState, ReactNode } from 'react'
-
-/** Podcast Interface. */
-interface Podcast {
-  id: string
-  title: string
-  author: string
-  imageUrl: string
-  summary: string
-  link: string
-}
+import { Podcast } from '@/app/types/podcast'
 
 /** PodcastsContextType Interface. */
 interface PodcastsContextType {

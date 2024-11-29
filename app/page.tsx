@@ -6,45 +6,7 @@
 
 /** Dependencies. */
 import Podcasts from '@/app/components/podcasts'
-
-/** Podcast Interface. */
-interface Podcast {
-  id: string
-  title: string
-  author: string
-  imageUrl: string
-  summary: string
-  link: string
-}
-
-/** ApiEntry Interface. */
-interface ApiEntry {
-  id: {
-    attributes: {
-      'im:id': string
-    }
-  }
-  'im:name': {
-    label: string
-  }
-  'im:artist': {
-    label: string
-  }
-  'im:image': Array<{
-    label: string
-    attributes: {
-      height: string
-    }
-  }>
-  summary: {
-    label: string
-  }
-  link: {
-    attributes: {
-      href: string
-    }
-  }
-}
+import { Podcast, PodcastEntry } from '@/app/types/podcast'
 
 /**
  * Fetches podcast data from the iTunes API.
@@ -62,7 +24,7 @@ const fetchPodcasts = async (): Promise<Podcast[]> => {
   const data = await response.json()
 
   // Transform the API response to match the Podcast interface.
-  return data.feed.entry.map((entry: ApiEntry) => ({
+  return data.feed.entry.map((entry: PodcastEntry) => ({
     id: entry.id.attributes['im:id'],
     title: entry['im:name'].label,
     author: entry['im:artist'].label,
