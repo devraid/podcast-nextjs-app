@@ -6,7 +6,7 @@
 
 /** Dependencies. */
 import Podcasts from '@/app/components/podcasts'
-import { Podcast, PodcastEntry } from '@/app/types/podcast'
+import { Podcast, PodcastEntry } from '@/app/types'
 
 /**
  * Fetches podcast data from the iTunes API.

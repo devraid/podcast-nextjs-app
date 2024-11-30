@@ -8,7 +8,6 @@ import { ReactNode } from 'react'
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import { PodcastsProvider } from '@/app/store/podcasts'
-import { PodcastDetailProvider } from '@/app/store/detail/podcast'
 import '@/app/globals.scss'
 
 /** Fonts Configuration. */
@@ -46,9 +45,7 @@ const RootLayout: React.FC<Readonly<{ children: ReactNode }>> = ({
 }: Readonly<{ children: ReactNode }>): JSX.Element => (
   <PodcastsProvider>
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <PodcastDetailProvider>{children}</PodcastDetailProvider>
-      </body>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
     </html>
   </PodcastsProvider>
 )
