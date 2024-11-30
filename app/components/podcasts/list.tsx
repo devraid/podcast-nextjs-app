@@ -8,7 +8,7 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from '@/app/components/image'
-import { Podcast } from '@/app/types/podcast'
+import { Podcast } from '@/app/types'
 
 /** ListPodcastsProps Interface. */
 interface ListPodcastsProps {

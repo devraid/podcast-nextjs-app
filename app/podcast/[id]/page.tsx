@@ -1,105 +1,66 @@
-'use client'
+'use server'
 /**
  * @author Miguel Chumillas.
- * @description Podcast Detail Page using context.
+ * @description Podcast page.
  */
 
 /** Dependencies. */
-import { useEffect } from 'react'
-import { usePodcastDetailContext } from '@/app//store/detail/podcast'
-import Image from '@/app/components/image'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import PodcastDetails from '@/app/components/podcast'
+import { PodcastItem, FullPodcast } from '@/app/types'
 
 /**
- * Podcast Detail Page.
+ * Fetches a single podcast data from the iTunes API.
  *
- * @returns {JSX.Element} - The podcast detail layout structure.
+ * @param {string} id - The podcast ID.
+ * @returns {Promise<FullPodcast>} - The podcast data formatted according to the Podcast interface.
  */
-const PodcastDetailPage = (): JSX.Element => {
-  const pathname = usePathname()
-  const id = pathname.split('/').pop() // Get the 'id' from URL params
-  const { podcast, setPodcast } = usePodcastDetailContext() // Get podcast data from context
-
-  useEffect(() => {
-    if (id) {
-      // Fetch the podcast detail by ID
-      setPodcast(null) // Reset podcast data before fetching new one
-      const fetchPodcastDetail = async (id: string) => {
-        try {
-          const response = await fetch(`https://itunes.apple.com/lookup?id=${id}`)
-          const data = await response.json()
-
-          if (data.results && data.results[0]) {
-            const podcastData = data.results[0]
-            const formattedPodcast = {
-              id: podcastData.collectionId,
-              title: podcastData.collectionName,
-              author: podcastData.artistName,
-              imageUrl: podcastData.artworkUrl100,
-              summary: podcastData.collectionCensoredName,
-              link: podcastData.collectionViewUrl,
-            }
-
-            setPodcast(formattedPodcast)
-          }
-        } catch (error) {
-          console.error('Error fetching podcast detail:', error)
-        }
-      }
-
-      fetchPodcastDetail(id)
-    }
-  }, [id, setPodcast])
-
-  // Show loading state while fetching
-  if (!podcast) {
-    return <div>Loading...</div>
-  }
-
-  // Show error if no podcast is found
-  if (!podcast) {
-    return <div>Podcast not found.</div>
-  }
-
-  return (
-    <div className="container mx-auto p-4">
-      <div className="flex flex-wrap justify-between items-center mb-8 gap-4">
-        <Link href="/">
-          <h1 className="text-sm font-bold text-blue-500 cursor-pointer flex-shrink-0">Podcaster</h1>
-        </Link>
-      </div>
-
-      {/* Podcast Details */}
-      <div className="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col items-center">
-        <div className="w-32 h-32 overflow-hidden rounded-full">
-          <Image
-            src={podcast.imageUrl}
-            alt={podcast.title}
-            width={128}
-            height={128}
-            unoptimized
-            priority
-            className="object-cover w-full h-full"
-          />
-        </div>
-        <div className="text-center mt-2">
-          <h2 className="text-xl font-bold text-gray-600 mb-2">{podcast.title}</h2>
-          <p className="text-sm font-semibold text-gray-400">Author: {podcast.author}</p>
-          <p className="mt-4 text-sm text-gray-600">{podcast.summary}</p>
-        </div>
-        <div className="mt-4">
-          <a
-            href={podcast.link}
-            target="_blank"
-            className="text-blue-500 hover:underline"
-          >
-            Listen to Podcast
-          </a>
-        </div>
-      </div>
-    </div>
+const fetchPodcast = async (id: string): Promise<FullPodcast> => {
+  const response = await fetch(
+    `https://itunes.apple.com/lookup?id=${id}&media=podcast
+ &entity=podcastEpisode&limit=20`,
+    {
+      cache: 'no-store',
+    },
   )
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`)
+  }
+
+  const data: { results: PodcastItem[] } = await response.json()
+  const podcastData = data.results[0]
+  const episodes = data.results
+    .filter((item) => item.wrapperType === 'podcastEpisode')
+    .map((episode) => ({
+      id: episode.trackId!.toString(),
+      title: episode.trackName || 'Untitled Episode',
+      releaseDate: new Date(episode.releaseDate!).toLocaleDateString(),
+      duration: episode.trackTimeMillis ? new Date(episode.trackTimeMillis).toISOString().substr(11, 8) : '00:00:00',
+    }))
+
+  return {
+    id: podcastData.collectionId!.toString(),
+    title: podcastData.collectionName || 'Unknown Title',
+    author: podcastData.artistName || 'Unknown Author',
+    imageUrl: podcastData.artworkUrl600 || '',
+    summary: podcastData.collectionCensoredName || 'No summary available',
+    link: podcastData.collectionViewUrl || '',
+    episodes,
+  }
 }
 
-export default PodcastDetailPage
+/**
+ * PodcastPage component responsible for server-side fetching and rendering the podcast details.
+ *
+ * @param {Readonly<{ params: { id: string } }>} context - Context object containing route parameters.
+ * @returns {Promise<JSX.Element>} - The page layout structure populated with podcast details.
+ */
+const PodcastPage = async ({ params }: { params: { id: string } }): Promise<JSX.Element> => {
+  const { id } = await params
+  const podcast = await fetchPodcast(id)
+
+  // Pass data to the client-side component
+  return <PodcastDetails podcast={podcast} />
+}
+
+export default PodcastPage

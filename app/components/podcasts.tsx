@@ -5,10 +5,10 @@
  */
 
 /** Dependencies. */
-import React, { useState } from 'react'
+import { usePodcasts } from '@/app/store/podcasts'
 import FilterPodcasts from '@/app/components/podcasts/filter'
 import ListPodcasts from '@/app/components/podcasts/list'
-import { Podcast } from '@/app/types/podcast'
+import { Podcast } from '@/app/types'
 
 /** PodcastsProps Interface. */
 interface PodcastsProps {
@@ -23,7 +23,8 @@ interface PodcastsProps {
  * @returns {JSX.Element} - The rendered component displaying the podcasts.
  */
 const Podcasts: React.FC<PodcastsProps> = ({ podcasts }) => {
-  const [filter, setFilter] = useState('')
+  // Use the Podcasts context
+  const { filter, setFilter } = usePodcasts()
 
   // Apply filter to podcasts
   const filteredPodcasts = podcasts.filter(
