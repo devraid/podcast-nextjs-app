@@ -1,11 +1,11 @@
 'use server'
 /**
  * @author Miguel Chumillas.
- * @description Podcast and Episodes.
+ * @description Episode.
  */
 
 /** Dependencies. */
-import PodcastDetails from '@/app/components/podcast'
+import PodcastDetailsEpisode from '@/app/components/episode'
 import { fetchPodcast } from '@/app/api/models/podcast'
 
 /**
@@ -14,17 +14,17 @@ import { fetchPodcast } from '@/app/api/models/podcast'
  * @param {Readonly<{ params: { id: string } }>} context - Context object containing route parameters.
  * @returns {Promise<JSX.Element>} - The page layout structure populated with podcast details.
  */
-const PodcastPage = async ({ params }: { params: { id: string } }): Promise<JSX.Element> => {
+const PodcastEpisodePage = async ({ params }: { params: { id: string } }): Promise<JSX.Element> => {
   const { id } = await params
   const podcast = await fetchPodcast(id)
 
   // Pass data to the client-side component
   return (
-    <PodcastDetails
+    <PodcastDetailsEpisode
       podcast={podcast}
       id={id}
     />
   )
 }
 
-export default PodcastPage
+export default PodcastEpisodePage

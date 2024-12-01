@@ -41,7 +41,7 @@ const ListPodcasts: React.FC<ListPodcastsProps> = ({ value }) => {
                 className="object-cover w-full h-full"
               />
             </div>
-            <div className="text-center mt-2 flex-grow flex flex-col justify-center">
+            <div className="text-center p-2 flex-grow flex flex-col justify-center">
               <h2 className="text-sm font-bold text-gray-600 mb-2 uppercase">{podcast.title}</h2>
               <p className="text-sm font-semibold text-gray-400">Author: {podcast.author}</p>
             </div>

@@ -5,6 +5,8 @@
  */
 
 /** Dependencies. */
+import { useEffect } from 'react'
+import Header from '@/app/components/layout/header'
 import { usePodcasts } from '@/app/store/podcasts'
 import FilterPodcasts from '@/app/components/podcasts/filter'
 import ListPodcasts from '@/app/components/podcasts/list'
@@ -24,7 +26,12 @@ interface PodcastsProps {
  */
 const Podcasts: React.FC<PodcastsProps> = ({ podcasts }) => {
   // Use the Podcasts context
-  const { filter, setFilter } = usePodcasts()
+  const { filter, setFilter, setPodcasts } = usePodcasts()
+
+  // Set podcasts in the context when the component is ready
+  useEffect(() => {
+    setPodcasts(podcasts)
+  }, [podcasts, setPodcasts])
 
   // Apply filter to podcasts
   const filteredPodcasts = podcasts.filter(
@@ -35,10 +42,8 @@ const Podcasts: React.FC<PodcastsProps> = ({ podcasts }) => {
 
   return (
     <div className="container mx-auto p-4">
-      {/* Main Title */}
-      <div className="flex justify-between items-center mb-4">
-        <h1 className="text-lg font-bold text-blue-500">Podcaster</h1>
-      </div>
+      {/* Header */}
+      <Header />
 
       {/* Filter Podcasts */}
       <FilterPodcasts

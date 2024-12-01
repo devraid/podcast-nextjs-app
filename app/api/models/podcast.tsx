@@ -32,7 +32,9 @@ export const fetchPodcast = async (id: string): Promise<FullPodcast> => {
       id: episode.trackId!.toString(),
       title: episode.trackName || 'Untitled Episode',
       releaseDate: new Date(episode.releaseDate!).toLocaleDateString(),
-      duration: episode.trackTimeMillis ? new Date(episode.trackTimeMillis).toISOString().substr(11, 8) : '00:00:00',
+      duration: episode.trackTimeMillis
+        ? new Date(episode.trackTimeMillis).toISOString().substr(11, 5) // Extracts "HH:mm"
+        : '00:00',
     }))
 
   return {
