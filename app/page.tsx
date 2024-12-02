@@ -22,6 +22,11 @@ const HomePage = async (): Promise<JSX.Element> => {
   const now = Date.now()
   const cacheDuration = 24 * 60 * 60 * 1000 // 24 hours.
 
+  /**
+   * Note:
+   * Only when the page is requested and when is rendered.
+   * Please, check podcasts.tsx for client side checking, where we perform an API call every 24 hours.
+   */
   if (!cachedPodcasts || now - lastFetchTime > cacheDuration) {
     cachedPodcasts = await fetchPodcasts()
     lastFetchTime = now

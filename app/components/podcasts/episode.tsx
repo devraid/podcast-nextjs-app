@@ -24,7 +24,6 @@ interface PodcastProps {
 const PodcastDetailsEpisode: React.FC<PodcastProps> = ({ episodeId, podcast }) => {
   const currentEpisode = podcast.episodes.find((episode) => episode.id === episodeId)
 
-  console.log(podcast.episodes)
   return (
     <div className="container mx-auto p-4">
       {/* Header */}
