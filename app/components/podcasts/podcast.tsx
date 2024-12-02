@@ -5,7 +5,6 @@
  */
 
 /** Dependencies. */
-import { usePodcasts } from '@/app/store/podcasts'
 import Header from '@/app/components/layout/header'
 import Link from 'next/link'
 import { Podcast, PodcastEpisode } from '@/app/types'
@@ -24,9 +23,6 @@ interface PodcastProps {
  * @returns {JSX.Element} - The rendered component displaying the podcast.
  */
 const PodcastDetails: React.FC<PodcastProps> = ({ podcast }) => {
-  // Use the Podcasts context
-  const { getSummary } = usePodcasts()
-
   return (
     <div className="container mx-auto p-4">
       {/* Header */}

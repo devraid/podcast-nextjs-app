@@ -7,9 +7,10 @@
 /** Dependencies. */
 import Podcasts from '@/app/components/podcasts'
 import { fetchPodcasts } from '@/app/api/models/podcasts'
+import { Podcast } from './types'
 
 /** Cache storage. */
-let cachedPodcasts: any = null
+let cachedPodcasts: Podcast[] | null = null
 let lastFetchTime: number = 0
 
 /**
