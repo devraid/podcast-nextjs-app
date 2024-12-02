@@ -5,7 +5,7 @@
  */
 
 /** Dependencies. */
-import PodcastDetails from '@/app/components/podcast'
+import PodcastDetails from '@/app/components/podcasts/podcast'
 import { fetchPodcast } from '@/app/api/models/podcast'
 
 /**

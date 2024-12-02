@@ -50,14 +50,18 @@ export interface PodcastItem {
   artworkUrl600?: string
   collectionCensoredName?: string
   collectionViewUrl?: string
+  episodeUrl: string
+  description: string
 }
 
 /** PodcastEpisode Interface. */
 export interface PodcastEpisode {
+  description: string | ''
   id: string
   title: string
   releaseDate: string
   duration: string
+  episodeUrl: string
 }
 
 /** FullPodcast Interface. */

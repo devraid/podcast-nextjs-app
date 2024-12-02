@@ -26,14 +26,25 @@ export const fetchPodcast = async (id: string): Promise<FullPodcast> => {
 
   const data: { results: PodcastItem[] } = await response.json()
   const podcastData = data.results[0]
+
   const episodes = data.results
     .filter((item) => item.wrapperType === 'podcastEpisode')
     .map((episode) => ({
       id: episode.trackId!.toString(),
       title: episode.trackName || 'Untitled Episode',
       releaseDate: new Date(episode.releaseDate!).toLocaleDateString(),
+      episodeUrl: episode.episodeUrl!,
+      description: episode.description || '',
       duration: episode.trackTimeMillis
-        ? new Date(episode.trackTimeMillis).toISOString().substr(11, 5) // Extracts "HH:mm"
+        ? (() => {
+            const hours = Math.floor(episode.trackTimeMillis / (1000 * 60 * 60))
+            const minutes = Math.floor((episode.trackTimeMillis % (1000 * 60 * 60)) / (1000 * 60))
+            const seconds = Math.round((episode.trackTimeMillis % (1000 * 60)) / 1000)
+
+            return hours > 0
+              ? `${hours}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
+              : `${minutes}:${String(seconds).padStart(2, '0')}`
+          })()
         : '00:00',
     }))
 
