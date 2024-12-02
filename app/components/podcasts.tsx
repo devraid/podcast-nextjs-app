@@ -8,6 +8,7 @@
 import { useEffect } from 'react'
 import Header from '@/app/components/layout/header'
 import { usePodcasts } from '@/app/store/podcasts'
+import { fetchPodcasts } from '@/app/api/models/podcasts'
 import FilterPodcasts from '@/app/components/podcasts/filter'
 import ListPodcasts from '@/app/components/podcasts/list'
 import { Podcast } from '@/app/types'
@@ -31,6 +32,15 @@ const Podcasts: React.FC<PodcastsProps> = ({ podcasts }) => {
   // Set podcasts in the context when the component is ready
   useEffect(() => {
     setPodcasts(podcasts)
+
+    // Note: After 24 hours we call the API again to update podcasts.
+    const interval = setInterval(
+      () => {
+        fetchPodcasts()
+      },
+      24 * 60 * 60 * 1000, // 24 hours.
+    ) // 24 hours
+    return () => clearInterval(interval)
   }, [podcasts, setPodcasts])
 
   // Apply filter to podcasts
