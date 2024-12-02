@@ -5,7 +5,7 @@
  */
 
 /** Dependencies. */
-import PodcastDetailsEpisode from '@/app/components/episode'
+import PodcastDetailsEpisode from '@/app/components/podcasts/episode'
 import { fetchPodcast } from '@/app/api/models/podcast'
 
 /**
@@ -14,15 +14,15 @@ import { fetchPodcast } from '@/app/api/models/podcast'
  * @param {Readonly<{ params: { id: string } }>} context - Context object containing route parameters.
  * @returns {Promise<JSX.Element>} - The page layout structure populated with podcast details.
  */
-const PodcastEpisodePage = async ({ params }: { params: { id: string } }): Promise<JSX.Element> => {
-  const { id } = await params
+const PodcastEpisodePage = async ({ params }: { params: { id: string; episodeId: string } }): Promise<JSX.Element> => {
+  const { id, episodeId } = await params
   const podcast = await fetchPodcast(id)
 
   // Pass data to the client-side component
   return (
     <PodcastDetailsEpisode
       podcast={podcast}
-      id={id}
+      episodeId={episodeId}
     />
   )
 }
