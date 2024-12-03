@@ -104,7 +104,7 @@ The application meets all functional requirements, including:
 
 ### **18\. Cache Strategy for Efficiency**
 
-Cache is implemented for improved performance by storing podcast data in both context and localstorage for 24 hours, reducing API calls. For example the podcast details saved on Context is used in the Homepage and Podcast Page. This results in faster load times and less network traffic.
+Cache is implemented for improved performance by storing podcast data in the Context for 24 hours, reducing API calls. For example the podcast’s details saved on Context are used in the Homepage and Podcast Page. This results in faster load times and less network traffic.
 
 ### **19\. Deployment**
 
@@ -120,6 +120,7 @@ app/
 │ └── layout/ \# Layout and header components  
 ├── store/ \# State management using hooks/context  
 ├── types/ \# TypeScript interfaces and types  
+\_\_tests\_\_/ \# Static assets like images and icons  
 public/ \# Static assets like images and icons  
 styles/ \# Global styles (if any)  
 pages/ \# Next.js pages (e.g., index, podcast details)  
@@ -127,6 +128,40 @@ pages/ \# Next.js pages (e.g., index, podcast details)
 .prettierrc \# Prettier configuration  
 tsconfig.json \# TypeScript configuration  
 tailwind.config.ts \# Tailwind CSS configuration  
-package.json \# Project dependencies and scripts
+package.json \# Project dependencies and scripts  
+jest.config.js \# Jest configuration  
+next.config.ts \# Next.js configuration
+
+### **21\. Installing the project**
+
+### **_Prerequisites_**
+
+Ensure you have the following installed on your machine:
+
+- **Node.js** (v18 or later) \- [Download](https://nodejs.org/)
+- **npm** (v8 or later) or **Yarn** for package management
+- **Git** for cloning the repository
+
+Clone the project: git clone [https://github.com/devraid/podcast-nextjs-app.git](https://github.com/devraid/podcast-nextjs-app.git)  
+Navigate to the project director, e.g: cd podcast-nextjs-app  
+Create a new branch for your feature or bug fix: git checkout \-b feature/\<branch-name\>
+
+**_Make Your Changes_**
+
+- Implement your feature or bug fix.
+- Follow the project's coding standards.
+- Ensure your changes don't break existing functionality by running tests
+
+Run tests to validate your changes: npm test
+
+Commit your changes using a descriptive message:  
+git add . git commit \-m "Add feature/fix: \<description\>"  
+git push origin feature/\<branch-name\>
+
+### **_Create a Pull Request_**
+
+- Go to the [repository](https://github.com/devraid/podcast-nextjs-app).
+- Click **"Pull Requests"** and then **"New Pull Request"**.
+- Select your fork and branch as the source and create the pull request.
 
 **Thanks for reading this\!**
