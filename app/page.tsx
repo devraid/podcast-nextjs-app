@@ -1,4 +1,4 @@
-'use server'
+'use client'
 /**
  * @author Miguel Chumillas.
  * @description Main page for the application.
@@ -7,33 +7,37 @@
 /** Dependencies. */
 import Podcasts from '@/app/components/podcasts'
 import { fetchPodcasts } from '@/app/api/models/podcasts'
+import { useState, useEffect } from 'react'
 import { Podcast } from './types'
 
-/** Cache storage. */
-let cachedPodcasts: Podcast[] | null = null
-let lastFetchTime: number = 0
-
 /**
- * HomePage component responsible for server-side fetching and rendering the podcasts list.
+ * HomePage component responsible for client-side fetching and rendering the podcasts list.
  *
- * @returns {Promise<JSX.Element>} - The page layout structure populated with podcasts.
+ * @returns {JSX.Element} - The page layout structure populated with podcasts.
  */
-const HomePage = async (): Promise<JSX.Element> => {
-  const now = Date.now()
-  const cacheDuration = 24 * 60 * 60 * 1000 // 24 hours.
+const HomePage = (): JSX.Element => {
+  const [podcasts, setPodcasts] = useState<Podcast[] | null>(null) // State for storing podcasts data
+  const [lastFetchTime, setLastFetchTime] = useState<number>(0) // State for storing the last fetch time
 
-  /**
-   * Note:
-   * Only when the page is requested and when is rendered.
-   * Please, check podcasts.tsx for client side checking, where we perform an API call every 24 hours.
-   */
-  if (!cachedPodcasts || now - lastFetchTime > cacheDuration) {
-    cachedPodcasts = await fetchPodcasts()
-    lastFetchTime = now
+  useEffect(() => {
+    const now = Date.now()
+    const cacheDuration = 24 * 60 * 60 * 1000 // 24 hours.
+
+    // If podcasts have not been fetched or the cache is expired.
+    if (!podcasts || now - lastFetchTime > cacheDuration) {
+      const fetchData = async () => {
+        const fetchedPodcasts = await fetchPodcasts()
+        setPodcasts(fetchedPodcasts)
+        setLastFetchTime(now)
+      }
+      fetchData()
+    }
+  }, [podcasts, lastFetchTime])
+
+  if (!podcasts) {
+    return <div>Loading...</div>
   }
-
-  // Pasar los datos al componente del cliente
-  return <Podcasts podcasts={cachedPodcasts} />
+  return <Podcasts podcasts={podcasts} />
 }
 
 export default HomePage
