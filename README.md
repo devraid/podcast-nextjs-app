@@ -145,6 +145,8 @@ Ensure you have the following installed on your machine:
 Clone the project: git clone [https://github.com/devraid/podcast-nextjs-app.git](https://github.com/devraid/podcast-nextjs-app.git)  
 Navigate to the project director, e.g: cd podcast-nextjs-app  
 Create a new branch for your feature or bug fix: git checkout \-b feature/\<branch-name\>
+Remember to use npm install command line, to install dependencies, use --legacy-peer-deps if you have dependencies problems, never use --force  
+Remember to use npm run dev for development and npm start for production 
 
 **_Make Your Changes_**
 
