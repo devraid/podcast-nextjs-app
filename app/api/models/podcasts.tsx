@@ -1,4 +1,4 @@
-'use server'
+'use client'
 /**
  * @author Miguel Chumillas.
  * @description Fetching logic for podcasts.

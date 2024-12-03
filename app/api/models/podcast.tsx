@@ -1,3 +1,4 @@
+'use client'
 /**
  * @author Miguel Chumillas.
  * @description Fetching logic for a single podcast and its episodes.
