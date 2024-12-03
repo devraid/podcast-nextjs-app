@@ -120,7 +120,7 @@ app/
 │ └── layout/ \# Layout and header components  
 ├── store/ \# State management using hooks/context  
 ├── types/ \# TypeScript interfaces and types  
-\_\_tests\_\_/ \# Static assets like images and icons  
+\_\_tests\_\_/ \# Jest tests  
 public/ \# Static assets like images and icons  
 styles/ \# Global styles (if any)  
 pages/ \# Next.js pages (e.g., index, podcast details)  
