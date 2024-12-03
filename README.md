@@ -38,7 +38,7 @@ The project is structured around a **component-based** approach:
 
 - **Reusable Components**: Components are modular, designed to be reused across the application. For example, podcast list items, audio players, and podcast details are all separate, independent components.
 - **Custom Hooks**: Custom hooks are created to handle specific logic like fetching podcast data, handling audio playback, etc., making the codebase cleaner and more maintainable.
-- **UI/UX**: Components are styled using **Tailwind CSS**, ensuring the UI is responsive and customizable without the need for heavy CSS. Only a global SCSS is used, where I added a custom browser bar. Of course, if we need custom SCSS that cannot be achieved using only tailwind, we can add modular files per component to scope the usage (e.g: header.module.scss could be used for the header.tsx component, again, just an example).
+- **UI/UX**: Components are styled using **Tailwind CSS**, ensuring the UI is responsive and customizable without the need for heavy CSS. Only a global SCSS is used, where I added a custom browser scroll to make it look nicer. Of course, if we need custom SCSS that cannot be achieved using only tailwind, we can add modular files per component to scope the usage (e.g: header.module.scss could be used for the header.tsx component, again, just an example).
 
 ### **4\. Code Quality**
 
