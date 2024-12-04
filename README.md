@@ -1,5 +1,10 @@
 # **Podcaster Next.Js App.**
 
+## **Contents**
+
+- [Key Design Decisions](#key-design-decisions)
+- [Installing the project](#installing-the-projec)
+
 ## **Project Description**
 
 This project is a podcast application built with **Next.js**, **TypeScript**, and **Tailwind CSS**. The application allows users to browse and listen to podcast episodes, displaying details and managing podcasts effectively. The architecture follows a modular and scalable approach using React's Context API for state management, custom hooks for reusable logic, and functional components for UI building.
@@ -49,7 +54,7 @@ The project is structured around a **component-based** approach:
 
 Testing is an integral part of the development process. **Jest** and **React Testing Library** are used for unit and integration tests. Tests are written to ensure the correctness of components and hooks, including edge cases like missing podcast data. Another option widely extended is Vitest, which is pretty similar and maybe more efficient, but I prefer Jest for React.
 
-### **6\. Caché and Performance**
+### **6\. Caching and Performance**
 
 The application utilizes **caching strategies** to minimize unnecessary API requests. By caching podcast data for a limited period, we avoid fetching the same data repeatedly, improving performance and user experience.
 
@@ -65,23 +70,19 @@ The project is optimized for production with **Webpack** (via Next.js), which ha
 
 In **development mode**, assets are served without minification for faster debugging and easier readability. I also modified package.json so it executes Eslint to make sure everything is perfect in terms of format/rules.. When in **production mode**, assets are minified and optimized for performance.
 
-### **10\. SSR with Next.js**
-
-The application uses **server-side rendering (SSR)** to load podcast data on the server before sending it to the client. This provides better SEO performance and faster initial page loads.
-
-### **11\. Custom Hooks**
+### **10\. Custom Hooks**
 
 Custom hooks are used to encapsulate logic and ensure **reusability**. For example, `useFetchPodcasts` handles API calls, and `useAudioPlayer` manages audio playback logic.
 
-### **12\. TypeScript**
+### **11\. TypeScript**
 
 TypeScript is used throughout the application with **full type safety**, providing better tooling and preventing runtime errors. All components, hooks, and API calls are fully typed. Eslint rule in my case will not allow the use of “Any”.
 
-### **13\. No Third-Party Component Libraries**
+### **12\. No Third-Party Component Libraries**
 
 To demonstrate proficiency in **CSS** and component creation, no external component libraries (like Material UI, Ant Design, etc.) are used. All components are created **from scratch**.
 
-### **15\. Version Control Best Practices**
+### **13\. Version Control Best Practices**
 
 The project follows **standard git practices** for commit messages, branch naming, and pull requests, like you see in the repo. The naming convention used is:
 
@@ -89,12 +90,12 @@ The project follows **standard git practices** for commit messages, branch namin
 - **Bugfix Branches**: `bugfix/bug-description`
 - **Commit Messages**: Clear and concise, following the format: `feat: add feature`, `fix: resolve bug`
 
-### **16\. Code Linting and Formatting**
+### **14\. Code Linting and Formatting**
 
 - **ESLint** is configured to catch potential issues and enforce a consistent coding style.
 - **Prettier** is used for automatic code formatting, ensuring that the code is clean and consistent across the entire codebase.
 
-### **17\. Requirements Compliance**
+### **15\. Requirements Compliance**
 
 The application meets all functional requirements, including:
 
@@ -102,15 +103,15 @@ The application meets all functional requirements, including:
 - **React Context API** used for state management.
 - The application is deployed and fully functional.
 
-### **18\. Cache Strategy for Efficiency**
+### **16\. Cache Strategy for Efficiency**
 
 Cache is implemented for improved performance by storing podcast data in the Context for 24 hours, reducing API calls. For example the podcast’s details saved on Context are used in the Homepage and Podcast Page. This results in faster load times and less network traffic.
 
-### **19\. Deployment**
+### **17\. Deployment**
 
 The app can be deployed on **Vercel** (or your preferred deployment platform), with a continuous integration and deployment pipeline for automatic builds and testing.
 
-### **20\. Folder structure**
+### **18\. Folder structure**
 
 app/  
 ├── api/ \# Server-side logic (data fetching, caching)  
@@ -132,7 +133,7 @@ package.json \# Project dependencies and scripts
 jest.config.js \# Jest configuration  
 next.config.ts \# Next.js configuration
 
-### **21\. Installing the project**
+## **Installing the project**
 
 ### **_Prerequisites_**
 
@@ -146,7 +147,7 @@ Clone the project: git clone [https://github.com/devraid/podcast-nextjs-app.git]
 Navigate to the project director, e.g: cd podcast-nextjs-app  
 Create a new branch for your feature or bug fix: git checkout \-b feature/\<branch-name\>
 Remember to use npm install command line, to install dependencies, use --legacy-peer-deps if you have dependencies problems, never use --force  
-Remember to use npm run dev for development and npm start for production 
+Remember to use npm run dev for development and npm start for production
 
 **_Make Your Changes_**
 
