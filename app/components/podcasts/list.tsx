@@ -18,10 +18,10 @@ interface ListPodcastsProps {
 /**
  * ListPodcasts component that provides a list podcasts.
  *
- * @param {ListPodcastsProps} props - Component properties containing the list of podcasts.
+ * @param {ListPodcastsProps} props - Component properties.
  * @returns {JSX.Element} - The rendered list of podcasts.
  */
-const ListPodcasts: React.FC<ListPodcastsProps> = ({ value }) => {
+const ListPodcasts: React.FC<ListPodcastsProps> = ({ value }: ListPodcastsProps): JSX.Element => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       {value.map((podcast) => (

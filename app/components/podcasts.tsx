@@ -22,10 +22,10 @@ interface PodcastsProps {
  * Podcasts component that displays a list of podcasts.
  * It accepts an array of podcasts and allows filtering by title or author.
  *
- * @param {PodcastsProps} props - Component properties that include the list of podcasts.
+ * @param {PodcastsProps} props - Component properties.
  * @returns {JSX.Element} - The rendered component displaying the podcasts.
  */
-const Podcasts: React.FC<PodcastsProps> = ({ podcasts }) => {
+const Podcasts: React.FC<PodcastsProps> = ({ podcasts }: PodcastsProps): JSX.Element => {
   // Use the Podcasts context
   const { filter, setFilter, setPodcasts } = usePodcasts()
 

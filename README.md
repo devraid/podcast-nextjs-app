@@ -3,7 +3,7 @@
 ## **Contents**
 
 - [Key Design Decisions](#key-design-decisions)
-- [Installing the project](#installing-the-projec)
+- [Installing the project](#installing-the-project)
 
 ## **Project Description**
 

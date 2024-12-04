@@ -19,10 +19,10 @@ interface PodcastProps {
 /**
  * Podcasts component that displays a podcast.
  *
- * @param {PodcastProps} props - Component properties that include the podcast.
- * @returns {JSX.Element} - The rendered component displaying the podcast.
+ * @param {PodcastProps} props - Component properties.
+ * @returns {JSX.Element} - The rendered component.
  */
-const PodcastDetails: React.FC<PodcastProps> = ({ podcast }) => {
+const PodcastDetails: React.FC<PodcastProps> = ({ podcast }: PodcastProps): JSX.Element => {
   return (
     <div className="container mx-auto p-4">
       {/* Header */}
