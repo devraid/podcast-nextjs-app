@@ -16,12 +16,12 @@ interface PodcastProps {
 }
 
 /**
- * Podcasts component that displays a podcast episode.
+ * Component that displays the episode.
  *
- * @param {PodcastProps} props - Component properties that include the podcast episode.
- * @returns {JSX.Element} - The rendered component displaying the podcast episode.
+ * @param {PodcastProps} props - Component properties.
+ * @returns {JSX.Element} - The rendered component.
  */
-const PodcastDetailsEpisode: React.FC<PodcastProps> = ({ episodeId, podcast }) => {
+const PodcastDetailsEpisode: React.FC<PodcastProps> = ({ episodeId, podcast }: PodcastProps): JSX.Element => {
   const currentEpisode = podcast.episodes.find((episode) => episode.id === episodeId)
 
   return (

@@ -16,13 +16,12 @@ interface PodcastProps {
 }
 
 /**
- * Podcasts component that displays a podcast.
+ * Component that displays a podcast.
  *
- * @param {PodcastProps} props - Component properties that include the podcast.
- * @returns {JSX.Element} - The rendered component displaying the podcast.
+ * @param {PodcastProps} props - Component properties.
+ * @returns {JSX.Element} - The rendered component.
  */
-const PodcastLeftDetails: React.FC<PodcastProps> = ({ podcast }) => {
-  // Use the Podcasts context
+const PodcastLeftDetails: React.FC<PodcastProps> = ({ podcast }: PodcastProps): JSX.Element => {
   const { getSummary } = usePodcasts()
 
   return (

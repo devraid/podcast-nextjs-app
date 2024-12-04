@@ -18,10 +18,14 @@ interface FilterPodcastsProps {
  * FilterPodcasts component that provides a search input to filter podcasts.
  * It also displays the count of filtered podcasts.
  *
- * @param {FilterPodcastsProps} props - Component properties containing the filter value, change handler, and podcast count.
+ * @param {FilterPodcastsProps} props - Component properties.
  * @returns {JSX.Element} - The rendered filter section with a count and search input.
  */
-const FilterPodcasts: React.FC<FilterPodcastsProps> = ({ value, onChange, count }) => {
+const FilterPodcasts: React.FC<FilterPodcastsProps> = ({
+  value,
+  onChange,
+  count,
+}: FilterPodcastsProps): JSX.Element => {
   return (
     <div className="flex items-center gap-4 mb-6 justify-between sm:justify-end">
       {/* Count Bubble */}

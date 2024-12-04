@@ -15,7 +15,7 @@ const customLoader = ({ src }: { src: string }) => {
 /**
  * Image.
  *
- * @returns {JSX.Element} - The page layout structure.
+ * @returns {JSX.Element} - The rendered component.
  */
 const Image = (props: NextImageProps): JSX.Element => {
   return (
