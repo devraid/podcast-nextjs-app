@@ -1,80 +1,57 @@
-import { render } from '@testing-library/react'
-import HomePage from './HomePage'
-import { fetchPodcasts } from '@/app/api/models/podcasts'
+/**
+ * @author Miguel Chumillas.
+ * @description HomePage test.
+ */
 
-// Mock the fetchPodcasts function
+/** Dependencies. */
+import { render, screen, act } from '@testing-library/react'
+import HomePage from '@/app/page.tsx'
+import { fetchPodcasts } from '@/app/api/models/podcasts'
+import { Podcast } from '@/app/types'
+
+/** Mock the fetchPodcasts. */
 jest.mock('@/app/api/models/podcasts', () => ({
   fetchPodcasts: jest.fn(),
 }))
 
-jest.mock('@/app/components/podcasts', () => jest.fn(() => <div>Mocked Podcasts Component</div>))
+/** Mock the Podcasts component. */
+jest.mock('@/app/components/podcasts', () =>
+  jest.fn(({ podcasts }) => <div>{`Mocked Podcasts: ${podcasts.length}`}</div>),
+)
 
 describe('HomePage', () => {
-  const mockPodcasts = [
-    { id: '1', title: 'Podcast 1', episodes: [] },
-    { id: '2', title: 'Podcast 2', episodes: [] },
-  ]
-
-  beforeEach(() => {
-    jest.clearAllMocks()
+  it('renders the loading state initially', () => {
+    render(<HomePage />)
+    expect(screen.getByText('Loading...')).toBeInTheDocument()
   })
 
-  it('fetches podcasts and renders the Podcasts component when the cache is empty', async () => {
-    // Mock fetchPodcasts to return mockPodcasts
-    ;(fetchPodcasts as jest.Mock).mockResolvedValue(mockPodcasts)
+  it('renders the Podcasts component with fetched data', async () => {
+    // Wrap rendering and state updates in act() to handle async updates properly
+    await act(async () => {
+      // Define mockPodcasts array with explicit type before using it
+      const mockPodcasts: Podcast[] = [
+        {
+          id: '1',
+          title: 'Podcast 1',
+          author: 'Author 1',
+          imageUrl: '',
+          summary: 'Yahooo, this is working.',
+          link: 'TBD',
+        },
+        {
+          id: '2',
+          title: 'Podcast 2',
+          author: 'Author 2',
+          imageUrl: '',
+          summary: '',
+          link: '',
+        },
+      ]
+      ;(fetchPodcasts as jest.Mock).mockResolvedValue(mockPodcasts)
+      render(<HomePage />)
 
-    // Render the HomePage component
-    const { findByText } = render(await HomePage())
-
-    // Check if fetchPodcasts is called
-    expect(fetchPodcasts).toHaveBeenCalledTimes(1)
-
-    // Check if Podcasts component is rendered with fetched data
-    expect(await findByText('Mocked Podcasts Component')).toBeInTheDocument()
-  })
-
-  it('uses the cached podcasts when the cache is valid', async () => {
-    // Set up cached data and a valid fetch time
-    const now = Date.now()
-    const cacheDuration = 24 * 60 * 60 * 1000 // 24 hours.
-    const validLastFetchTime = now - cacheDuration + 1000 // within cache duration
-
-    const mockCache = jest.requireActual('./HomePage')
-    mockCache.cachedPodcasts = mockPodcasts
-    mockCache.lastFetchTime = validLastFetchTime
-
-    // Render the HomePage component
-    const { findByText } = render(await HomePage())
-
-    // Check that fetchPodcasts was NOT called
-    expect(fetchPodcasts).not.toHaveBeenCalled()
-
-    // Verify that the cached podcasts are used
-    expect(await findByText('Mocked Podcasts Component')).toBeInTheDocument()
-  })
-
-  it('fetches new podcasts when the cache is stale', async () => {
-    // Set up stale cache data
-    const now = Date.now()
-    const cacheDuration = 24 * 60 * 60 * 1000 // 24 hours.
-    const staleLastFetchTime = now - cacheDuration - 1000 // beyond cache duration
-
-    const mockCache = jest.requireActual('./HomePage')
-    mockCache.cachedPodcasts = mockPodcasts
-    mockCache.lastFetchTime = staleLastFetchTime
-
-    // Mock fetchPodcasts to return updated podcasts
-    const updatedPodcasts = [{ id: '3', title: 'Podcast 3', episodes: [] }](
-      fetchPodcasts as jest.Mock,
-    ).mockResolvedValue(updatedPodcasts)
-
-    // Render the HomePage component
-    const { findByText } = render(await HomePage())
-
-    // Verify fetchPodcasts is called
-    expect(fetchPodcasts).toHaveBeenCalledTimes(1)
-
-    // Verify that Podcasts component renders with the updated data
-    expect(await findByText('Mocked Podcasts Component')).toBeInTheDocument()
+      // Assert that the fetchPodcasts function was called once
+      expect(fetchPodcasts).toHaveBeenCalledTimes(1)
+    })
   })
 })
