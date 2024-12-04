@@ -6,7 +6,6 @@
 
 /** Dependencies. */
 import { useEffect } from 'react'
-import Header from '@/app/components/layout/header'
 import { usePodcasts } from '@/app/store/podcasts'
 import { fetchPodcasts } from '@/app/api/models/podcasts'
 import FilterPodcasts from '@/app/components/podcasts/filter'
@@ -51,10 +50,7 @@ const Podcasts: React.FC<PodcastsProps> = ({ podcasts }: PodcastsProps): JSX.Ele
   )
 
   return (
-    <div className="container mx-auto p-4">
-      {/* Header */}
-      <Header />
-
+    <div>
       {/* Filter Podcasts */}
       <FilterPodcasts
         value={filter}

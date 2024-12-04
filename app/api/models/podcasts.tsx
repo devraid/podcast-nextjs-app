@@ -14,7 +14,8 @@ import { Podcast, PodcastEntry } from '@/app/types'
  */
 export const fetchPodcasts = async (): Promise<Podcast[]> => {
   const response = await fetch('https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json', {
-    cache: 'no-store',
+    cache: 'force-cache', // Enables caching
+    next: { revalidate: 86400 }, // Revalidate the cache every 24 hours (86400 seconds)
   })
 
   if (!response.ok) {

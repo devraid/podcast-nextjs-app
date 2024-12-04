@@ -5,7 +5,6 @@
  */
 
 /** Dependencies. */
-import Header from '@/app/components/layout/header'
 import { Podcast, PodcastEpisode } from '@/app/types'
 import PodcastLeftDetails from '@/app/components/podcasts/details'
 
@@ -25,10 +24,7 @@ const PodcastDetailsEpisode: React.FC<PodcastProps> = ({ episodeId, podcast }: P
   const currentEpisode = podcast.episodes.find((episode) => episode.id === episodeId)
 
   return (
-    <div className="container mx-auto p-4">
-      {/* Header */}
-      <Header />
-
+    <div>
       {/* Left Column and Right Column */}
       <div className="flex flex-col md:flex-row gap-6 lg:gap-20">
         {/* Left Column: Podcast Details */}

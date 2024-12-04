@@ -26,7 +26,6 @@ const PodcastPage = ({ params }: { params: Promise<{ id: string }> }): JSX.Eleme
       const { id } = await params
       setId(id) // Set the id from params to state
     }
-
     fetchParams()
   }, [params])
 
@@ -37,7 +36,9 @@ const PodcastPage = ({ params }: { params: Promise<{ id: string }> }): JSX.Eleme
       setLoading(false)
     }
 
-    getPodcastData()
+    if (id) {
+      getPodcastData()
+    }
   }, [id])
 
   if (loading) {

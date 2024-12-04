@@ -17,7 +17,8 @@ export const fetchPodcast = async (id: string): Promise<FullPodcast> => {
   const response = await fetch(
     `https://itunes.apple.com/lookup?id=${id}&media=podcast&entity=podcastEpisode&limit=20`,
     {
-      cache: 'no-store',
+      cache: 'force-cache', // Enables caching
+      next: { revalidate: 86400 }, // Revalidate the cache every 24 hours (86400 seconds)
     },
   )
 
