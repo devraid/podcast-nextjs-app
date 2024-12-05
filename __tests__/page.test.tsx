@@ -4,6 +4,7 @@
  */
 
 /** Dependencies. */
+import React from 'react'
 import { render, screen, act } from '@testing-library/react'
 import HomePage from '@/app/page.tsx'
 import { fetchPodcasts } from '@/app/lib/api/models/podcasts'

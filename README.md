@@ -133,7 +133,6 @@ package.json \# Project dependencies and scripts
 jest.config.js \# Jest configuration
 jest.setup.js \# Jest setup  
 next.config.ts \# Next.js configuration
-babel.config.js \# Babel configuration
 
 ## **Installing the project**
 
