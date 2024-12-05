@@ -6,11 +6,11 @@
 /** Dependencies. */
 import { render, screen, act } from '@testing-library/react'
 import HomePage from '@/app/page.tsx'
-import { fetchPodcasts } from '@/app/api/models/podcasts'
+import { fetchPodcasts } from '@/app/lib/api/models/podcasts'
 import { Podcast } from '@/app/types'
 
 /** Mock the fetchPodcasts. */
-jest.mock('@/app/api/models/podcasts', () => ({
+jest.mock('@/app/lib/api/models/podcasts', () => ({
   fetchPodcasts: jest.fn(),
 }))
 

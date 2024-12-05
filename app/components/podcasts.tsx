@@ -7,7 +7,7 @@
 /** Dependencies. */
 import { useEffect } from 'react'
 import { usePodcasts } from '@/app/store/podcasts'
-import { fetchPodcasts } from '@/app/api/models/podcasts'
+import { fetchPodcasts } from '@/app/lib/api/models/podcasts'
 import FilterPodcasts from '@/app/components/podcasts/filter'
 import ListPodcasts from '@/app/components/podcasts/list'
 import { Podcast } from '@/app/types'

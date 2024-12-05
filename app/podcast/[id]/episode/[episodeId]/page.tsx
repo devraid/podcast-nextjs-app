@@ -6,7 +6,7 @@
 
 /** Dependencies. */
 import PodcastDetailsEpisode from '@/app/components/podcasts/episode'
-import { fetchPodcast } from '@/app/api/models/podcast'
+import { fetchPodcast } from '@/app/lib/api/models/podcast'
 import { useState, useEffect, use } from 'react'
 import { FullPodcast } from '@/app/types'
 
