@@ -4,13 +4,14 @@
  */
 
 /** Dependencies. */
+import React from 'react'
 import { render, screen, act } from '@testing-library/react'
 import HomePage from '@/app/page.tsx'
-import { fetchPodcasts } from '@/app/api/models/podcasts'
+import { fetchPodcasts } from '@/app/lib/api/models/podcasts'
 import { Podcast } from '@/app/types'
 
 /** Mock the fetchPodcasts. */
-jest.mock('@/app/api/models/podcasts', () => ({
+jest.mock('@/app/lib/api/models/podcasts', () => ({
   fetchPodcasts: jest.fn(),
 }))
 
@@ -25,10 +26,8 @@ describe('HomePage', () => {
     expect(screen.getByText('Loading...')).toBeInTheDocument()
   })
 
-  it('renders the Podcasts component with fetched data', async () => {
-    // Wrap rendering and state updates in act() to handle async updates properly
+  it('renders the Podcasts page with fetched data', async () => {
     await act(async () => {
-      // Define mockPodcasts array with explicit type before using it
       const mockPodcasts: Podcast[] = [
         {
           id: '1',
@@ -49,8 +48,6 @@ describe('HomePage', () => {
       ]
       ;(fetchPodcasts as jest.Mock).mockResolvedValue(mockPodcasts)
       render(<HomePage />)
-
-      // Assert that the fetchPodcasts function was called once
       expect(fetchPodcasts).toHaveBeenCalledTimes(1)
     })
   })

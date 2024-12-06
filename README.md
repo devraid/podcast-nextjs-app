@@ -114,7 +114,7 @@ The app can be deployed on **Vercel** (or your preferred deployment platform), w
 ### **18\. Folder structure**
 
 app/  
-├── api/ \# Server-side logic (data fetching, caching)  
+├── lib/api/ \# Server-side logic (data fetching, caching)  
 │ └── models/ \# Models to handle podcast and episode data fetching  
 ├── components/ \# Reusable React components  
 │ ├── podcasts/ \# Podcast and episode-specific components  
@@ -130,7 +130,8 @@ pages/ \# Next.js pages (e.g., index, podcast details)
 tsconfig.json \# TypeScript configuration  
 tailwind.config.ts \# Tailwind CSS configuration  
 package.json \# Project dependencies and scripts  
-jest.config.js \# Jest configuration  
+jest.config.js \# Jest configuration
+jest.setup.js \# Jest setup  
 next.config.ts \# Next.js configuration
 
 ## **Installing the project**
