@@ -26,10 +26,8 @@ describe('HomePage', () => {
     expect(screen.getByText('Loading...')).toBeInTheDocument()
   })
 
-  it('renders the Podcasts component with fetched data', async () => {
-    // Wrap rendering and state updates in act() to handle async updates properly
+  it('renders the Podcasts page with fetched data', async () => {
     await act(async () => {
-      // Define mockPodcasts array with explicit type before using it
       const mockPodcasts: Podcast[] = [
         {
           id: '1',
@@ -50,8 +48,6 @@ describe('HomePage', () => {
       ]
       ;(fetchPodcasts as jest.Mock).mockResolvedValue(mockPodcasts)
       render(<HomePage />)
-
-      // Assert that the fetchPodcasts function was called once
       expect(fetchPodcasts).toHaveBeenCalledTimes(1)
     })
   })

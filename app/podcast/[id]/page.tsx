@@ -19,6 +19,7 @@ import { useState, useEffect } from 'react'
 const PodcastPage = ({ params }: { params: Promise<{ id: string }> }): JSX.Element => {
   const [podcast, setPodcast] = useState<FullPodcast>()
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
   const [id, setId] = useState<string>('')
 
   useEffect(() => {
@@ -31,9 +32,15 @@ const PodcastPage = ({ params }: { params: Promise<{ id: string }> }): JSX.Eleme
 
   useEffect(() => {
     const getPodcastData = async () => {
-      const podcastData = await fetchPodcast(id)
-      setPodcast(podcastData)
-      setLoading(false)
+      try {
+        setError(null)
+        const podcastData = await fetchPodcast(id)
+        setPodcast(podcastData)
+      } catch {
+        setError('Error loading podcast details')
+      } finally {
+        setLoading(false)
+      }
     }
 
     if (id) {
@@ -43,6 +50,10 @@ const PodcastPage = ({ params }: { params: Promise<{ id: string }> }): JSX.Eleme
 
   if (loading) {
     return <div>Loading...</div>
+  }
+
+  if (error) {
+    return <div>{error}</div>
   }
 
   if (!podcast) {
