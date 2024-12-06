@@ -5,10 +5,9 @@
  */
 
 /** Dependencies. */
-import PodcastDetails from '@/app/components/podcasts/podcast'
-import { fetchPodcast } from '@/app/lib/api/models/podcast'
-import { FullPodcast } from '@/app/types'
 import { useState, useEffect } from 'react'
+import PodcastDetails from '@/app/components/podcasts/podcast'
+import usePodcast from '@/app/hooks/use-podcast'
 
 /**
  * PodcastPage component responsible for client-side fetching and rendering the podcast details.
@@ -17,36 +16,17 @@ import { useState, useEffect } from 'react'
  * @returns {JSX.Element} - The page layout structure populated with podcast and episode details.
  */
 const PodcastPage = ({ params }: { params: Promise<{ id: string }> }): JSX.Element => {
-  const [podcast, setPodcast] = useState<FullPodcast>()
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
   const [id, setId] = useState<string>('')
 
   useEffect(() => {
     const fetchParams = async () => {
       const { id } = await params
-      setId(id) // Set the id from params to state
+      setId(id)
     }
     fetchParams()
   }, [params])
 
-  useEffect(() => {
-    const getPodcastData = async () => {
-      try {
-        setError(null)
-        const podcastData = await fetchPodcast(id)
-        setPodcast(podcastData)
-      } catch {
-        setError('Error loading podcast details')
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    if (id) {
-      getPodcastData()
-    }
-  }, [id])
+  const { podcast, loading, error } = usePodcast(id)
 
   if (loading) {
     return <div>Loading...</div>

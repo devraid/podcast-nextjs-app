@@ -64,6 +64,6 @@ describe('PodcastEpisodePage', () => {
       )
     })
 
-    expect(screen.getByText('Error loading episode details')).toBeInTheDocument()
+    expect(screen.getByText('Error loading data')).toBeInTheDocument()
   })
 })
