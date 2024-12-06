@@ -1,0 +1,15 @@
+// Nice effect in SCSS, could be done in tailwind ))
+.podcast-image {
+  img {
+    transition: transform 0.5s cubic-bezier(0.25, 1.25, 0.5, 1.25);
+    transform: scale(1);
+  }
+
+  &:hover img {
+    transform: scale(1.2);
+  }
+
+  &:not(:hover) img {
+    transition: transform 0.3s ease-in-out;
+  }
+}
