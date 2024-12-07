@@ -5,7 +5,7 @@
  */
 
 /** Dependencies. */
-import { usePodcasts } from '@/app/store/podcasts'
+import { useStorePodcasts } from '@/app/store/podcasts'
 import Image from '@/app/components/image'
 import Link from 'next/link'
 import { Podcast, PodcastEpisode } from '@/app/types'
@@ -22,7 +22,8 @@ interface PodcastProps {
  * @returns {JSX.Element} - The rendered component.
  */
 const PodcastLeftDetails: React.FC<PodcastProps> = ({ podcast }: PodcastProps): JSX.Element => {
-  const { getSummary } = usePodcasts()
+  // Get Summary Details from the Podcasts Store Context
+  const { getSummary } = useStorePodcasts()
 
   return (
     <div className="md:w-1/4 w-full">

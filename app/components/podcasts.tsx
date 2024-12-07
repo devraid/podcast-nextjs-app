@@ -6,7 +6,7 @@
 
 /** Dependencies. */
 import { useEffect } from 'react'
-import { usePodcasts } from '@/app/store/podcasts'
+import { useStorePodcasts } from '@/app/store/podcasts'
 import { fetchPodcasts } from '@/app/lib/api/models/podcasts'
 import FilterPodcasts from '@/app/components/podcasts/filter'
 import ListPodcasts from '@/app/components/podcasts/list'
@@ -25,8 +25,8 @@ interface PodcastsProps {
  * @returns {JSX.Element} - The rendered component displaying the podcasts.
  */
 const Podcasts: React.FC<PodcastsProps> = ({ podcasts }: PodcastsProps): JSX.Element => {
-  // Use the Podcasts context
-  const { filter, setFilter, setPodcasts } = usePodcasts()
+  // Use the Podcasts Store Context
+  const { filter, setFilter, setPodcasts } = useStorePodcasts()
 
   // Set podcasts in the context when the component is ready
   useEffect(() => {
