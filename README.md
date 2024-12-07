@@ -119,12 +119,12 @@ app/
 ├── components/ \# Reusable React components  
 │ ├── podcasts/ \# Podcast and episode-specific components  
 │ └── layout/ \# Layout and header components  
+├── fonts/ \# Fonts  
+├── hooks/ \# Shared hooks  
 ├── store/ \# State management using hooks/context  
 ├── types/ \# TypeScript interfaces and types  
 \_\_tests\_\_/ \# Jest tests  
 public/ \# Static assets like images and icons  
-styles/ \# Global styles (if any)  
-pages/ \# Next.js pages (e.g., index, podcast details)  
 .eslintrc.json \# ESLint configuration  
 .prettierrc \# Prettier configuration  
 tsconfig.json \# TypeScript configuration  
@@ -144,8 +144,70 @@ Ensure you have the following installed on your machine:
 - **npm** (v8 or later) or **Yarn** for package management
 - **Git** for cloning the repository
 
-Clone the project: git clone [https://github.com/devraid/podcast-nextjs-app.git](https://github.com/devraid/podcast-nextjs-app.git)  
-Navigate to the project director, e.g: cd podcast-nextjs-app  
+Download the project files and set up the application:
+
+# Option 1: Clone the Repository
+
+1. Clone the project:
+   ```bash
+   git clone https://github.com/devraid/podcast-nextjs-app.git
+   cd podcast-nextjs-app
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+# Option 2: Download ZIP
+
+1. Download the project as a ZIP file [here](https://github.com/devraid/podcast-nextjs-app/archive/refs/heads/main.zip).
+2. Extract the ZIP and navigate to the project directory:
+   ```bash
+   cd podcast-nextjs-app
+   ```
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+# Run the Application
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+Visit [http://localhost:3000](http://localhost:3000) to view the app.
+
+---
+
+# Building and Deploying to Vercel
+
+## Build Locally
+
+1. Build the app:
+   ```bash
+   npm run build
+   ```
+2. Run the production server:
+   ```bash
+   npm start
+   ```
+
+# Deploy to Vercel
+
+1. [Download the Vercel CLI](https://vercel.com/download) or log in to the Vercel dashboard.
+2. Run the following commands:
+   ```bash
+   npm install -g vercel
+   vercel
+   ```
+   Follow the prompts to deploy your application.
+
+Alternatively, visit the Vercel dashboard to link and deploy your repository.
+
+**_Notes and Usage_**
 Create a new branch for your feature or bug fix: git checkout \-b feature/\<branch-name\>
 Remember to use npm install command line, to install dependencies, use --legacy-peer-deps if you have dependencies problems, never use --force  
 Remember to use npm run dev for development and npm start for production
