@@ -146,7 +146,7 @@ Ensure you have the following installed on your machine:
 
 Download the project files and set up the application:
 
-# Option 1: Clone the Repository
+### Option 1: Clone the Repository
 
 1. Clone the project:
    ```bash
@@ -158,7 +158,7 @@ Download the project files and set up the application:
    npm install
    ```
 
-# Option 2: Download ZIP
+### Option 2: Download ZIP
 
 1. Download the project as a ZIP file [here](https://github.com/devraid/podcast-nextjs-app/archive/refs/heads/main.zip).
 2. Extract the ZIP and navigate to the project directory:
@@ -170,7 +170,7 @@ Download the project files and set up the application:
    npm install
    ```
 
-# Run the Application
+### Run the Application
 
 Start the development server:
 
@@ -182,9 +182,9 @@ Visit [http://localhost:3000](http://localhost:3000) to view the app.
 
 ---
 
-# Building and Deploying to Vercel
+## Building and Deploying to Vercel
 
-## Build Locally
+### Build Locally
 
 1. Build the app:
    ```bash
@@ -195,7 +195,7 @@ Visit [http://localhost:3000](http://localhost:3000) to view the app.
    npm start
    ```
 
-# Deploy to Vercel
+## Deploy to Vercel
 
 1. [Download the Vercel CLI](https://vercel.com/download) or log in to the Vercel dashboard.
 2. Run the following commands:
