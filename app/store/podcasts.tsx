@@ -55,16 +55,16 @@ export const PodcastsProvider: React.FC<PodcastsProviderProps> = ({ children }) 
 }
 
 /**
- * Custom hook to access the podcasts context.
+ * Access the podcasts context.
  * This hook allows components to access podcasts, filter state, and utility functions.
  *
  * @throws {Error} - Throws an error if used outside of a PodcastsProvider.
  * @returns {PodcastsContextType} - The value from the PodcastsContext.
  */
-export const usePodcasts = (): PodcastsContextType => {
+export const useStorePodcasts = (): PodcastsContextType => {
   const context = useContext(PodcastsContext)
   if (!context) {
-    throw new Error('usePodcasts must be used within a PodcastsProvider.')
+    throw new Error('useStorePodcasts must be used within a PodcastsProvider.')
   }
   return context
 }
