@@ -1,7 +1,7 @@
 'use client'
 /**
  * @author Miguel Chumillas.
- * @description Main page for the application.
+ * @description Main page for the Podcast application.
  */
 
 /** Dependencies. */
